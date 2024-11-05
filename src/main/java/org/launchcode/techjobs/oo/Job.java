@@ -2,29 +2,51 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
-public class Job {
-    public Job(int id) {
-        this.id = id;
+public class Job extends JobField {
+    private final int id;
+    private static int nextId = 1;
+
+    private String name;
+    private Employer employer;
+    private Location location;
+    private PositionType positionType;
+    private CoreCompetency coreCompetency;
+
+    public Job() {
+        this.id = nextId;
+        nextId++;
     }
+
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
         this.name = name;
         this.employer = employer;
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
+
     public int getId() {
         return id;
     }
+
     @Override
-    public String toString(){
-       return System.lineSeparator() +
-                "ID: " + id + System.lineSeparator() +
-                "Name: " + name + System.lineSeparator() +
-                "Employer: " + employer + System.lineSeparator() +
-                "Location: " + location + System.lineSeparator() +
-                "Position Type: " + positionType + System.lineSeparator() +
-                "Core Competency: " + coreCompetency + System.lineSeparator();
+    public String toString() {
+
+        String idValue = (getId() > 0) ? String.valueOf(getId()) : "Data not available";
+        String nameValue = (name != null && !name.trim().isEmpty()) ? name : "Data not available";
+        String employerValue = (employer != null && !employer.getValue().trim().isEmpty()) ? employer.getValue() : "Data not available";
+        String locationValue = (location != null && !location.getValue().trim().isEmpty()) ? location.getValue() : "Data not available";
+        String positionTypeValue = (positionType != null && !positionType.getValue().trim().isEmpty()) ? positionType.getValue() : "Data not available";
+        String coreCompetencyValue = (coreCompetency != null && !coreCompetency.getValue().trim().isEmpty()) ? coreCompetency.getValue() : "Data not available";
+
+        return System.lineSeparator() +
+                "ID: " + idValue + System.lineSeparator() +
+                "Name: " + nameValue + System.lineSeparator() +
+                "Employer: " + employerValue + System.lineSeparator() +
+                "Location: " + locationValue + System.lineSeparator() +
+                "Position Type: " + positionTypeValue + System.lineSeparator() +
+                "Core Competency: " + coreCompetencyValue + System.lineSeparator();
     }
 
     @Override
@@ -32,12 +54,12 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id == job.id && Objects.equals(name, job.name) && Objects.equals(employer, job.employer) && Objects.equals(location, job.location) && Objects.equals(positionType, job.positionType) && Objects.equals(coreCompetency, job.coreCompetency);
+        return id == job.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, employer, location, positionType, coreCompetency);
+        return Objects.hash(id);
     }
 
     public String getName() {
@@ -80,24 +102,4 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-
-
-    private int id;
-    private static int nextId = 1;
-
-    private String name;
-    private Employer employer;
-    private Location location;
-    private PositionType positionType;
-    private CoreCompetency coreCompetency;
-
-    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
-    //  other five fields. The second constructor should also call the first in order to initialize
-    //  the 'id' field.
-
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
-
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
 }

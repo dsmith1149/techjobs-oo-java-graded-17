@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import static java.lang.System.lineSeparator;
 
 /**
@@ -68,17 +69,17 @@ public class AbstractTest {
         return idField.getInt(job);
     }
 
-    protected String getJobString (Job job) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
+    protected String getJobString(Job job) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         return String.format(
-            lineSeparator() +
-            "ID: %d" + lineSeparator() +
-            "Name: %s" + lineSeparator() +
-            "Employer: %s" + lineSeparator() +
-            "Location: %s" + lineSeparator() +    
-            "Position Type: %s" + lineSeparator() +
-            "Core Competency: %s" + lineSeparator(), 
-            getJobId(job), getJobFieldString(job, "name", true), getJobFieldString(job, "employer", true), getJobFieldString(job, "location", true),
-            getJobFieldString(job, "positionType", true), getJobFieldString(job, "coreCompetency", true)
+                lineSeparator() +
+                        "ID: %d" + lineSeparator() +
+                        "Name: %s" + lineSeparator() +
+                        "Employer: %s" + lineSeparator() +
+                        "Location: %s" + lineSeparator() +
+                        "Position Type: %s" + lineSeparator() +
+                        "Core Competency: %s" + lineSeparator(),
+                getJobId(job), getJobFieldString(job, "name", true), getJobFieldString(job, "employer", true), getJobFieldString(job, "location", true),
+                getJobFieldString(job, "positionType", true), getJobFieldString(job, "coreCompetency", true)
         );
     }
 
